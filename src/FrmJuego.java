@@ -5,6 +5,7 @@ import java.util.Random;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
 
@@ -12,6 +13,7 @@ public class FrmJuego extends JFrame {
 
     JPanel pnlJugador1, pnlJugador2;
     Jugador jugador1, jugador2;
+    JTabbedPane tpJugadores;
 
     public FrmJuego() {
         setTitle("Juguemos al apuntado");
@@ -35,7 +37,7 @@ public class FrmJuego extends JFrame {
         pnlJugador2.setBackground(new Color(0, 255, 255));
         pnlJugador2.setLayout(null);
 
-        JTabbedPane tpJugadores = new JTabbedPane();
+        tpJugadores = new JTabbedPane();
         tpJugadores.addTab("Martín Estrada Contreras", pnlJugador1);
         tpJugadores.addTab("Raúl Vidal", pnlJugador2);
 
@@ -60,9 +62,9 @@ public class FrmJuego extends JFrame {
 
         });
 
-        //instanciar losjugadores
-        jugador1=new Jugador();
-        jugador2=new Jugador();
+        // instanciar losjugadores
+        jugador1 = new Jugador();
+        jugador2 = new Jugador();
     }
 
     private void repartir() {
@@ -74,7 +76,17 @@ public class FrmJuego extends JFrame {
     }
 
     private void verificar() {
-
+        int pestaña = tpJugadores.getSelectedIndex();
+        switch (pestaña) {
+            case 0:
+                JOptionPane.showMessageDialog(null,
+                        jugador1.getGrupos());
+                break;
+            case 1:
+                JOptionPane.showMessageDialog(null,
+                        jugador2.getGrupos());
+                break;
+        }
     }
 
 }

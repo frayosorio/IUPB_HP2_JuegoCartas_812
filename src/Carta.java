@@ -2,7 +2,11 @@ import java.util.Random;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Carta {
 
@@ -19,6 +23,16 @@ public class Carta {
         lblCarta.setIcon(imgCarta);
         lblCarta.setBounds(x, y, imgCarta.getIconWidth(), imgCarta.getIconHeight());
         pnl.add(lblCarta);
+
+        // agregar evento cuando se hace clic en la carta
+        lblCarta.addMouseListener(new MouseAdapter() {
+
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                JOptionPane.showMessageDialog(null,
+                        getNombre() + " " + getPinta());
+            }
+        });
     }
 
     public Pinta getPinta() {
@@ -28,10 +42,15 @@ public class Carta {
             return Pinta.PICA;
         } else if (indice <= 39) {
             return Pinta.CORAZON;
-        }
-        else{
+        } else {
             return Pinta.DIAMANTE;
         }
+    }
+
+    public NombreCarta getNombre() {
+        int residuo = indice % 13;
+        int posicion = residuo == 0 ? 12 : residuo - 1;
+        return NombreCarta.values()[posicion];
     }
 
 }
